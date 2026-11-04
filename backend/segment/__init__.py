@@ -1,0 +1,1 @@
+"""Segmentation pipeline stubs."""

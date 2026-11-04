@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#121214" />
+    <title>VeilFrame</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="console-shell">
+
+      <!-- ── Brand header ── -->
+      <header class="site-header">
+        <div class="brand">
+          <span class="brand-name">VeilFrame</span>
+          <span class="brand-tag">apparel coverage engine</span>
+        </div>
+        <span class="mono-readout" id="health-readout">link: checking...</span>
+      </header>
+
+      <!-- ── Workspace: viewer + side panel ── -->
+      <div class="workspace">
+
+        <!-- Left: main viewer -->
+        <section class="viewer-col" aria-label="Media inspection panel">
+          <div
+            class="viewing-frame"
+            id="viewing-frame"
+            role="region"
+            tabindex="0"
+            aria-label="Select or drop footage to inspect"
+          >
+            <input
+              type="file"
+              id="file-input"
+              accept=".mp4,.mov,.webm,.jpg,.jpeg,.png,.webp,video/mp4,video/quicktime,video/webm,image/jpeg,image/png,image/webp"
+              hidden
+            />
+            <div class="drop-prompt" id="drop-prompt">
+              <p>Select or drop footage to inspect</p>
+              <span class="mono-readout">mp4, mov, webm, png, jpg</span>
+            </div>
+            <video id="video-player" controls playsinline hidden></video>
+            <img id="image-player" alt="Inspection frame" hidden />
+            <button class="view-toggle" id="view-toggle" type="button" hidden>
+              view: covered
+            </button>
+            <div
+              class="progress-track"
+              id="progress-track"
+              role="progressbar"
+              aria-label="Processing progress"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              aria-valuenow="0"
+            >
+              <div class="progress-fill" id="progress-fill"></div>
+            </div>
+          </div>
+
+          <div class="control-strip" id="control-strip">
+            <div class="readout-group" aria-live="polite">
+              <span class="file-readout" id="file-readout">no file loaded</span>
+              <div class="status-line">
+                <span class="tally-dot" id="tally-dot" aria-hidden="true"></span>
+                <span class="status-readout" id="status-readout">idle — awaiting file</span>
+                <span class="frame-counter mono-readout" id="frame-counter" hidden>000 / 000</span>
+              </div>
+            </div>
+
+            <div class="controls-group">
+              <label class="consent-check">
+                <input type="checkbox" id="consent-input" checked />
+                <span>consent verified</span>
+              </label>
+              <button class="btn" id="select-btn" type="button">select file</button>
+              <button class="btn btn-process" id="process-btn" type="button" disabled>
+                process
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Right: live pipeline panel -->
+        <aside class="pipeline-panel" id="pipeline-panel" aria-label="Pipeline status">
+          <div class="panel-heading">
+            <span class="panel-title">pipeline</span>
+            <span class="panel-subtitle mono-readout" id="panel-mode">—</span>
+          </div>
+
+          <ol class="pipeline-steps" id="pipeline-steps">
+            <!-- steps injected by JS -->
+          </ol>
+
+          <div class="panel-footer mono-readout" id="panel-footer">awaiting job</div>
+        </aside>
+
+      </div><!-- /workspace -->
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>
